@@ -6,12 +6,22 @@ let browser;
 let page;
 
 const normalizeNumber = (number) => {
-    let numberNormalized = String(number);
+    if (typeof number === 'number') {
+        let numberNormalized = String(number);
 
-    numberNormalized = numberNormalized.replace('R$', '');
-    numberNormalized = numberNormalized.replace(',', '.');
+        numberNormalized = Number(numberNormalized).toFixed(2);
 
-    return Number(numberNormalized).toFixed(2);
+        return numberNormalized;
+    } else {
+        let numberNormalized = String(number);
+
+        numberNormalized = numberNormalized.replace('R$', '');
+        numberNormalized = numberNormalized.replace('.', '');
+        numberNormalized = numberNormalized.replace(',', '.');
+        numberNormalized = Number(numberNormalized).toFixed(2);
+    
+        return numberNormalized;
+    }
 }
 
 beforeAll(async () => {
@@ -51,7 +61,6 @@ test('Should render the React app checking fields from the page', async () => {
     }
 });
 
-
 test('Should convert values from $7.500 (USD) to R$ correctly', async () => {
     // Navigate the page to a URL
     await page.goto('http://localhost:5173/');
@@ -77,11 +86,15 @@ test('Should convert values from $7.500 (USD) to R$ correctly', async () => {
         return paragrafo.textContent; // Isso retorna o texto dentro do elemento <p>.
     });
 
+    let numberNormalized = normalizeNumber(convertedValue);
+    console.log(`convertedValue: ${convertedValue}`)
+    console.log(`convertedValueNormalized: ${numberNormalized}`)
+
+    await page.waitForTimeout(TIMEOUT);
     let valueInReal = normalizeNumber(+valueInDolar * rate);
 
-    expect(normalizeNumber(convertedValue)).toBe(valueInReal);
+    expect(numberNormalized).toBe(valueInReal);
 });
-
 
 test('Should convert values from $10000 (CAD) to R$ correctly', async () => {
     // Navigate the page to a URL
