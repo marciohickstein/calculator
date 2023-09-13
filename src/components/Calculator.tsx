@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import APILayer from "../services/APILayer";
-import { formatCurrency, convertValue } from "../utils/money";
 import ICurrencyAPI from "../services/ICurrencyAPI";
+import { formatCurrency, convertValue } from "../utils/money";
 
 const DEFAULT_CURRENCY = "USD";
 const layer: ICurrencyAPI = new APILayer();

@@ -22,7 +22,6 @@ class APILayer implements ICurrencyAPI{
                 console.error('Error converting currency:', data.error.info ? data.error.info : 'transation returned unsuccessfully');
                 return [];
             } else {
-                console.log('Success');
                 return Object.keys(data.currencies);
             }
         } catch (error) {
