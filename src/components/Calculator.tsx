@@ -10,22 +10,7 @@ function Calculator() {
     const [currencies, setCurrencies] = useState<string[]>([]);
     const [exchangeRate, setExchangeRate] = useState<number>(0);
     const [currentValue, setCurrentValue] = useState<number>(0);
-    const [isFocused, setIsFocused] = useState(false);
 
-    const handleFocus = (target) => {
-        console.log(target.select())
-        setIsFocused(true);
-    };
-
-    const handleBlur = () => {
-        setIsFocused(false);
-    };
-
-    const inputStyle = {
-        // border: isFocused ? '2px solid #007bff' : '1px solid #ccc',
-        // backgroundColor: isFocused ? '#f0f8ff' : 'white',
-      };
-    
     async function changeExchangeRate(selectedOption: string) {
         const rate = await layer.getExchangeRate(selectedOption, 'BRL');
 
@@ -71,7 +56,7 @@ function Calculator() {
                     </select>
                 </div>
                 <div className="col-9">
-                    <input style={inputStyle} onFocus={(e) => handleFocus(e.target)} onBlur={handleBlur} onChange={(event) => changeCurrentValue(Number(event?.target.value))} type="text" className="form-control" id="inputValue" value={currentValue} />
+                    <input onChange={(event) => changeCurrentValue(Number(event?.target.value))} type="text" className="form-control" id="inputValue" value={currentValue} />
                 </div>
             </div>
             <hr />
