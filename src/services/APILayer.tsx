@@ -11,7 +11,6 @@ const CONFIG = {
 };
 
 class APILayer implements ICurrencyAPI {
-
     // A full list of supported currencies can be accessed both in JSON Format.
     async currencyData(): Promise<string[]> {
         try {

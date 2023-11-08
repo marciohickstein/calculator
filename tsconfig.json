@@ -21,6 +21,6 @@
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
   },
-  "include": ["src", "src/test/serviceApi.test.ts"],
+  "include": [ "src" ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
